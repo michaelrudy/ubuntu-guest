@@ -125,7 +125,6 @@ EOF
 echo "==============================="
 echo " Setting GNOME dock favorites via dconf (chroot-safe)..."
 echo "==============================="
-# gsettings doesn't work in chroot - use dconf database instead
 mkdir -p /etc/dconf/db/local.d
 tee /etc/dconf/db/local.d/01-kiosk-settings > /dev/null << 'EOF'
 [org/gnome/shell]

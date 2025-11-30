@@ -1,7 +1,5 @@
 # Needs to be run in a internet-connected environment
-# Assumes rdcore.deb and safenet.deb are in /root/install-resources
-
-cd /root/install-resources
+# Assumes rdcore.deb and safenet.deb are in /root/install-resources/pre-install/
 
 echo "=== Update apt metadata ==="
 apt update -y
@@ -32,6 +30,14 @@ apt install -y \
   p11-kit-modules \
   opensc
 
+echo "=== Install audio packages ==="
+apt install -y \
+  pulseaudio \
+  pulseaudio-module-bluetooth \
+  pavucontrol \
+  alsa-utils \
+  rtkit
+
 echo "=== Remove unwanted terminal apps ==="
 apt purge -y \
   byobu \
@@ -59,6 +65,8 @@ echo "=== Install UBUNTU22-STIG role ==="
 mkdir -p /etc/ansible/roles
 ansible-galaxy install -p /etc/ansible/roles \
   git+https://github.com/ansible-lockdown/UBUNTU22-STIG.git
+
+apt purge git -y || true 
 
 echo "=== Enable GDM3 and set graphical target ==="
 systemctl set-default graphical.target
