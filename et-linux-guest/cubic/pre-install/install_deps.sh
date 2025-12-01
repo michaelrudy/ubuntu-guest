@@ -1,75 +1,46 @@
-# Needs to be run in a internet-connected environment
+#!/usr/bin/env bash
+# Modular installation script for Cubic chroot environment
+# Needs to be run in an internet-connected environment
 # Assumes rdcore.deb and safenet.deb are in /root/install-resources/pre-install/
 
-echo "=== Update apt metadata ==="
-apt update -y
-apt install git -y # needed for ansible sti
+set -e  # Exit on any error
 
-echo "=== Ensure locale is generated ==="
-apt install -y locales
-locale-gen en_US.UTF-8
-update-locale LANG=en_US.UTF-8
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MODULES_DIR="${SCRIPT_DIR}/modules"
 
-echo "=== Install GNOME + base deps ==="
-apt install -y \
-  gnome-session \
-  gnome-shell \
-  gdm3 \
-  gnome-settings-daemon \
-  dbus-user-session \
-  adwaita-icon-theme-full \
-  libsoup-3.0-0 \
-  libwebkit2gtk-4.1-dev \
-  libubsan1
+# Function to run a module
+run_module() {
+    local module="$1"
+    local module_path="${MODULES_DIR}/${module}"
+    
+    if [[ -f "${module_path}" ]]; then
+        echo ""
+        echo "╔════════════════════════════════════════════════════════════════╗"
+        echo "║  Running: ${module}"
+        echo "╚════════════════════════════════════════════════════════════════╝"
+        bash "${module_path}"
+    else
+        echo "⚠️  Module not found: ${module_path}"
+        return 1
+    fi
+}
 
-echo "=== Install smart card stack ==="
-apt install -y \
-  pcscd \
-  pcsc-tools \
-  p11-kit \
-  p11-kit-modules \
-  opensc
+# Main execution
+echo "╔════════════════════════════════════════════════════════════════╗"
+echo "║  Ubuntu 22.04 Hardened Guest - Pre-Install Setup"
+echo "║  Running modular installation..."
+echo "╚════════════════════════════════════════════════════════════════╝"
 
-echo "=== Install audio packages ==="
-apt install -y \
-  pulseaudio \
-  pulseaudio-module-bluetooth \
-  pavucontrol \
-  alsa-utils \
-  rtkit
+# Run modules in order
+run_module "00_base_system.sh"
+run_module "10_gnome_desktop.sh"
+run_module "20_smart_card.sh"
+run_module "30_audio.sh"
+run_module "40_proprietary_debs.sh"
+run_module "50_ansible_stig.sh"
+run_module "99_cleanup.sh"
 
-echo "=== Remove unwanted terminal apps ==="
-apt purge -y \
-  byobu \
-  htop \
-  info \
-  texinfo \
-  vim \
-  yelp || true
-
-echo "=== Install rdcore.deb and safenet.deb (with deps) ==="
-dpkg -i ./rdcore.deb ./safenet.deb || apt install -f -y
-# optional: rerun dpkg to be 100% sure they’re fully configured
-dpkg -i ./rdcore.deb ./safenet.deb || true
-
-echo "=== Ensure adapt-repository exists ==="
-apt install -y software-properties-common
-
-echo "=== Install Ansible from official PPA ==="
-apt remove -y ansible ansible-core || true
-add-apt-repository --yes ppa:ansible/ansible
-apt update -y
-apt install -y ansible
-
-echo "=== Install UBUNTU22-STIG role ==="
-mkdir -p /etc/ansible/roles
-ansible-galaxy install -p /etc/ansible/roles \
-  git+https://github.com/ansible-lockdown/UBUNTU22-STIG.git
-
-apt purge git -y || true 
-
-echo "=== Enable GDM3 and set graphical target ==="
-systemctl set-default graphical.target
-systemctl enable gdm3 || true
-
-echo "=== Cubic chroot setup complete ==="
+echo ""
+echo "╔════════════════════════════════════════════════════════════════╗"
+echo "║  ✓ All modules completed successfully"
+echo "╚════════════════════════════════════════════════════════════════╝"

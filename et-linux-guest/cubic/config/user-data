@@ -21,8 +21,5 @@ autoinstall:
     # Set root password (password: root) - allows "su - root" or TTY login
     - curtin in-target -- bash -c "echo 'root:root' | chpasswd"
     
-    # Copy and run your script
-    - curtin in-target -- mkdir -p /root/install-resources
-    - cp /opt/install-resources/install_guest.sh /target/root/install-resources/
-    - curtin in-target -- chmod +x /root/install-resources/install_guest.sh
-    - curtin in-target -- bash /root/install-resources/install_guest.sh 2>&1 | tee /target/opt/install.log
+    # Run installation script directly from /opt/install-resources (already on ISO)
+    - curtin in-target -- bash /opt/install-resources/install_guest.sh 2>&1 | tee /opt/install.log
