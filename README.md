@@ -1,21 +1,75 @@
 # Ubuntu 22.04 Hardened Guest OS
 
-Custom Ubuntu 22.04 guest operating system pre-configured with enterprise security hardening and smart card authentication used for Microsoft Remote Desktop application.
+Custom Ubuntu 22.04 guest operating system configured with enterprise security hardening and smart card authentication.
 
 ## Features
 
-- **Microsoft Remote Desktop**: Pinned Azure Virtual Desktop client
 - **DISA STIG Compliance**: Hardened against Defense Information Systems Agency Security Technical Implementation Guide standards
-- **Smart Card Authentication**: CAC/PIV card support enabled
+- **Smart Card Authentication**: CAC/PIV card support enabled (pcscd, opensc, p11-kit)
+- **Audio & Video Support**: PulseAudio with USB device support, webcam-ready
+- **Modular Build System**: Easy-to-customize installation modules
 - **Enterprise Ready**: Suitable for government and high-security environments
 
-## Contents
+## Project Structure
 
-- `et-linux-guest/cubic/`: Build configuration and installation scripts
-- `install_guest.sh`: Main guest OS installation and hardening script
-- `install_deps.sh`: Dependency installation
+```
+et-linux-guest/cubic/
+├── config/
+│   └── user-data                    # Cloud-init autoinstall configuration
+│   └── meta-data                    
+├── pre-install/
+│   ├── install_deps.sh              # Main pre-install orchestrator
+│   └── modules/                     # Pre-install modules (run in Cubic chroot)
+│       ├── 00_base_system.sh        # Base system setup (apt, locale)
+│       ├── 10_gnome_desktop.sh      # GNOME desktop environment
+│       ├── 20_smart_card.sh         # Smart card stack (pcscd, opensc)
+│       ├── 30_audio.sh              # PulseAudio and audio packages
+│       ├── 40_proprietary_debs.sh   # Custom .deb packages (rdcore, safenet)
+│       ├── 50_ansible_stig.sh       # Ansible + UBUNTU22-STIG role
+│       └── 99_cleanup.sh            # Remove unwanted apps, finalize
+└── install-resources/
+    ├── install_guest.sh             # Main guest installation orchestrator
+    └── modules/                     # Guest install modules (run on first boot)
+        ├── 00_system_prep.sh        # Locale generation
+        ├── 10_cleanup_apps.sh       # Remove terminal applications
+        ├── 20_smart_card_config.sh  # Configure p11-kit SafeNet module
+        ├── 30_user_setup.sh         # Create users (gdm, kiosk), configure autologin
+        ├── 35_audio_config.sh       # Configure audio/video groups, PulseAudio
+        ├── 40_gnome_config.sh       # dconf settings (dock, screensaver, lockdown)
+        ├── 50_apply_stig.sh         # Run DISA STIG hardening playbook
+        └── 99_finalize.sh           # Enable GDM, final system checks
+```
+
+## Modular Architecture
+
+The build system uses a modular approach with numbered script modules:
+
+- **Numbered prefixes** (00, 10, 20...): Define execution order and dependencies
+- **Pre-install modules**: Run during ISO creation in Cubic chroot environment
+- **Guest install modules**: Run during first boot via cloud-init autoinstall
+- **Easy customization**: Comment out module calls in main scripts to disable features
+
+### Adding/Removing Features
+
+To disable a feature, comment out the corresponding module in the main orchestrator script:
+
+```bash
+# In install_deps.sh or install_guest.sh
+# run_module "30_audio.sh"  # Disable audio support
+```
+
+To add a new module, create a numbered script (e.g., `25_new_feature.sh`) and add it to the orchestrator.
+
+## Build Process
+
+1. **Pre-Install** (`install_deps.sh`): Installs packages and configures the ISO in Cubic
+2. **Autoinstall** (`user-data`): Automated Ubuntu installation with cloud-init
+3. **Guest Install** (`install_guest.sh`): First-boot configuration and hardening
 
 ## Usage
 
-Build the custom ISO using the provided scripts in the `et-linux-guest/cubic/` directory.
+Build the custom ISO using Cubic with the provided configuration in `et-linux-guest/cubic/`.
 
+## Installation Log
+
+After installation, review `/opt/install.log` on the installed system for detailed output.

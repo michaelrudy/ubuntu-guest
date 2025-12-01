@@ -22,4 +22,4 @@ autoinstall:
     - curtin in-target -- bash -c "echo 'root:root' | chpasswd"
     
     # Run installation script directly from /opt/install-resources (already on ISO)
-    - curtin in-target -- bash /opt/install-resources/install_guest.sh 2>&1 | tee /opt/install.log
+    - curtin in-target -- bash /opt/install-resources/install_guest.sh 2>&1 | tee /target/opt/install.log

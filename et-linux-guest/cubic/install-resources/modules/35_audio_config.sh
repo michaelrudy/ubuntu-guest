@@ -15,8 +15,8 @@ systemctl start rtkit-daemon.service || true
 systemctl --global enable pulseaudio.socket || true
 systemctl --global enable pulseaudio.service || true
 
-# Add kiosk user to audio group
-usermod -aG audio kiosk || true
+# Add kiosk user to audio and video groups
+usermod -aG audio,video kiosk || true
 
 # Create PulseAudio configuration for kiosk user
 mkdir -p /home/kiosk/.config/pulse
