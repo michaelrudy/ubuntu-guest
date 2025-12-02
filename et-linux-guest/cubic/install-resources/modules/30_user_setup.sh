@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
-echo "=== Ensuring gdm user exists ==="
-# GDM requires this user - it may not exist after autoinstall
-getent group gdm >/dev/null || groupadd -r gdm
-getent passwd gdm >/dev/null || useradd -r -g gdm -d /var/lib/gdm3 -s /usr/sbin/nologin gdm
-mkdir -p /var/lib/gdm3
-chown -R gdm:gdm /var/lib/gdm3
-chmod 750 /var/lib/gdm3
+echo "=== Ensuring lightdm user exists ==="
+# LightDM requires this user to run the greeter
+getent group lightdm >/dev/null || groupadd -r lightdm
+getent passwd lightdm >/dev/null || useradd -r -g lightdm -d /var/lib/lightdm -s /usr/sbin/nologin -c "Light Display Manager" lightdm
+mkdir -p /var/lib/lightdm
+mkdir -p /var/lib/lightdm-data
+chown -R lightdm:lightdm /var/lib/lightdm
+chown -R lightdm:lightdm /var/lib/lightdm-data
+chmod 750 /var/lib/lightdm
 
 echo "=== Ensuring kiosk user exists ==="
 if ! id -u kiosk >/dev/null 2>&1; then
@@ -15,18 +17,14 @@ if ! id -u kiosk >/dev/null 2>&1; then
   echo "kiosk:kiosk" | chpasswd
 fi
 
-echo "=== Configuring GDM autologin for kiosk ==="
-tee /etc/gdm3/custom.conf > /dev/null << 'EOF'
-[daemon]
-AutomaticLoginEnable=true
-AutomaticLogin=kiosk
+echo "=== Configuring LightDM autologin for kiosk ==="
+# Create LightDM configuration directory
+mkdir -p /etc/lightdm/lightdm.conf.d
 
-[security]
-
-[xdmcp]
-
-[chooser]
-
-[debug]
-#Enable=true
+# Configure autologin for kiosk user
+tee /etc/lightdm/lightdm.conf.d/50-kiosk-autologin.conf > /dev/null << 'EOF'
+[Seat:*]
+autologin-user=kiosk
+autologin-user-timeout=0
+user-session=xfce
 EOF

@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
+echo "=== Setting locale for Ansible ==="
+# Generate and set locale for Ansible (required for STIG playbook)
+locale-gen en_US.UTF-8 || true
+update-locale LANG=en_US.UTF-8 || true
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 echo "=== Creating DISA STIG playbook ==="
 tee /tmp/apply-stig.yml > /dev/null << 'EOF'
 ---

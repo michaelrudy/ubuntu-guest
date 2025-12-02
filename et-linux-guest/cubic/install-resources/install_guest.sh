@@ -36,7 +36,7 @@ run_module "10_cleanup_apps.sh"
 run_module "20_smart_card_config.sh"
 run_module "30_user_setup.sh"
 run_module "35_audio_config.sh"
-run_module "40_gnome_config.sh"
+run_module "40_xfce_config.sh"
 run_module "50_apply_stig.sh"
 run_module "99_finalize.sh"
 

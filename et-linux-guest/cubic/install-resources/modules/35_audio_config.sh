@@ -7,11 +7,10 @@ echo "=== Configuring audio system ==="
 getent group rtkit >/dev/null || groupadd -r rtkit
 getent passwd rtkit >/dev/null || useradd -r -g rtkit -d /proc -s /usr/sbin/nologin -c "RealtimeKit" rtkit
 
-# Enable and start rtkit daemon
+# Enable rtkit daemon (will start on boot)
 systemctl enable rtkit-daemon.service || true
-systemctl start rtkit-daemon.service || true
 
-# Enable and start PulseAudio socket for systemd user sessions
+# Enable PulseAudio socket for systemd user sessions
 systemctl --global enable pulseaudio.socket || true
 systemctl --global enable pulseaudio.service || true
 
