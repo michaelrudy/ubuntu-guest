@@ -4,11 +4,20 @@ Custom Ubuntu 22.04 guest operating system configured with enterprise security h
 
 ## Features
 
+- **XFCE4 Kiosk Mode**: Lightweight desktop with locked-down single-app interface
 - **DISA STIG Compliance**: Hardened against Defense Information Systems Agency Security Technical Implementation Guide standards
 - **Smart Card Authentication**: CAC/PIV card support enabled (pcscd, opensc, p11-kit)
 - **Audio & Video Support**: PulseAudio with USB device support, webcam-ready
 - **Modular Build System**: Easy-to-customize installation modules
 - **Enterprise Ready**: Suitable for government and high-security environments
+
+## Screenshots
+
+See the `examples/` directory for screenshots of the kiosk interface and configuration.
+
+![Kiosk Desktop](examples/main.png)
+![AVD Smart Card Auth](examples/auth.png)
+![AVD Session](examples/avd-session.png)
 
 ## Project Structure
 
@@ -21,7 +30,7 @@ et-linux-guest/cubic/
 │   ├── install_deps.sh              # Main pre-install orchestrator
 │   └── modules/                     # Pre-install modules (run in Cubic chroot)
 │       ├── 00_base_system.sh        # Base system setup (apt, locale)
-│       ├── 10_gnome_desktop.sh      # GNOME desktop environment
+│       ├── 10_xfce_desktop.sh       # XFCE4 desktop + LightDM display manager
 │       ├── 20_smart_card.sh         # Smart card stack (pcscd, opensc)
 │       ├── 30_audio.sh              # PulseAudio and audio packages
 │       ├── 40_proprietary_debs.sh   # Custom .deb packages (rdcore, safenet)
@@ -31,14 +40,23 @@ et-linux-guest/cubic/
     ├── install_guest.sh             # Main guest installation orchestrator
     └── modules/                     # Guest install modules (run on first boot)
         ├── 00_system_prep.sh        # Locale generation
-        ├── 10_cleanup_apps.sh       # Remove terminal applications
+        ├── 10_cleanup_apps.sh       # Placeholder (cleanup done in pre-install)
         ├── 20_smart_card_config.sh  # Configure p11-kit SafeNet module
-        ├── 30_user_setup.sh         # Create users (gdm, kiosk), configure autologin
+        ├── 30_user_setup.sh         # Create users (lightdm, kiosk), configure autologin
         ├── 35_audio_config.sh       # Configure audio/video groups, PulseAudio
-        ├── 40_gnome_config.sh       # dconf settings (dock, screensaver, lockdown)
+        ├── 40_xfce_config.sh        # XFCE4 panel, desktop, kiosk lockdown
         ├── 50_apply_stig.sh         # Run DISA STIG hardening playbook
-        └── 99_finalize.sh           # Enable GDM, final system checks
+        └── 99_finalize.sh           # Enable LightDM, final system checks
 ```
+
+## Desktop Environment
+
+The kiosk interface features:
+- Full-width top panel with app launcher, window list, and audio control
+- Disabled desktop right-click and icons
+- Locked panel configuration
+- No screensaver or screen locking
+- Single-purpose application focus
 
 ## Modular Architecture
 
