@@ -11,14 +11,6 @@ Custom Ubuntu 22.04 guest operating system configured with enterprise security h
 - **Modular Build System**: Easy-to-customize installation modules
 - **Enterprise Ready**: Suitable for government and high-security environments
 
-## Screenshots
-
-See the `examples/` directory for screenshots of the kiosk interface and configuration.
-
-![Kiosk Desktop](examples/main.png)
-![AVD Smart Card Auth](examples/auth.png)
-![AVD Session](examples/avd-session.png)
-
 ## Project Structure
 
 ```
