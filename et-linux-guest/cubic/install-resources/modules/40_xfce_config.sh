@@ -7,13 +7,14 @@ echo "=== Configuring XFCE4 kiosk mode ==="
 mkdir -p /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml
 mkdir -p /home/kiosk/.config/xfce4/panel
 
-# Configure XFCE4 Panel - full-width top bar
+# Configure XFCE4 Panel - dual panel setup (top bar + bottom taskbar)
 tee /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml > /dev/null << 'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <channel name="xfce4-panel" version="1.0">
   <property name="configver" type="int" value="2"/>
   <property name="panels" type="array">
     <value type="int" value="1"/>
+    <value type="int" value="2"/>
     <property name="panel-1" type="empty">
       <property name="position" type="string" value="p=6;x=0;y=0"/>
       <property name="length" type="uint" value="100"/>
@@ -34,6 +35,25 @@ tee /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml > /dev/
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
         <value type="int" value="2"/>
+      </property>
+    </property>
+    <property name="panel-2" type="empty">
+      <property name="position" type="string" value="p=10;x=0;y=0"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="48"/>
+      <property name="autohide-behavior" type="uint" value="0"/>
+      <property name="disable-struts" type="bool" value="false"/>
+      <property name="mode" type="uint" value="0"/>
+      <property name="nrows" type="uint" value="1"/>
+      <property name="background-style" type="uint" value="1"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0.117647"/>
+        <value type="double" value="0.117647"/>
+        <value type="double" value="0.117647"/>
+        <value type="double" value="0.95"/>
+      </property>
+      <property name="plugin-ids" type="array">
         <value type="int" value="3"/>
       </property>
     </property>
@@ -44,15 +64,15 @@ tee /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml > /dev/
         <value type="string" value="msrdc.desktop"/>
       </property>
     </property>
-    <property name="plugin-2" type="string" value="tasklist">
+    <property name="plugin-2" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="show-notifications" type="bool" value="true"/>
+    </property>
+    <property name="plugin-3" type="string" value="tasklist">
       <property name="flat-buttons" type="bool" value="true"/>
       <property name="include-all-workspaces" type="bool" value="true"/>
       <property name="show-labels" type="bool" value="true"/>
       <property name="show-handle" type="bool" value="false"/>
-    </property>
-    <property name="plugin-3" type="string" value="pulseaudio">
-      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="show-notifications" type="bool" value="true"/>
     </property>
   </property>
 </channel>
