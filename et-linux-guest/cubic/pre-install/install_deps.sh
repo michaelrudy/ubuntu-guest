@@ -35,6 +35,7 @@ echo "╚═══════════════════════�
 run_module "00_base_system.sh"
 run_module "10_xfce_desktop.sh"
 run_module "20_smart_card.sh"
+run_module "25_usbguard.sh"
 run_module "30_audio.sh"
 run_module "40_proprietary_debs.sh"
 run_module "50_ansible_stig.sh"

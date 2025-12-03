@@ -34,6 +34,7 @@ echo "╚═══════════════════════�
 run_module "00_system_prep.sh"
 run_module "10_cleanup_apps.sh"
 run_module "20_smart_card_config.sh"
+run_module "25_usb_whitelist.sh"
 run_module "30_user_setup.sh"
 run_module "35_audio_config.sh"
 run_module "40_xfce_config.sh"

@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
+# TO-DO: need to move out the xml stuff into a separate config folder for easier maintenance
+
 echo "=== Configuring XFCE4 kiosk mode ==="
+
+# Copy wallpaper to system backgrounds directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+INSTALL_RESOURCES_DIR="$(dirname "$SCRIPT_DIR")"
+mkdir -p /usr/share/backgrounds
+cp "${INSTALL_RESOURCES_DIR}/assets/wallpaper.png" /usr/share/backgrounds/wallpaper.png
+chmod 644 /usr/share/backgrounds/wallpaper.png
 
 # Create XFCE4 configuration directory for kiosk user
 mkdir -p /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml
@@ -78,10 +87,22 @@ tee /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml > /dev/
 </channel>
 EOF
 
-# Configure XFCE4 Desktop - disable right-click, hide icons
+# Configure XFCE4 Desktop - disable right-click, hide icons, set wallpaper
 tee /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml > /dev/null << 'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <channel name="xfce4-desktop" version="1.0">
+  <property name="backdrop" type="empty">
+    <property name="screen0" type="empty">
+      <property name="monitorVirtual-1" type="empty">
+        <property name="workspace0" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/wallpaper.png"/>
+          <property name="image-path" type="string" value="/usr/share/backgrounds/wallpaper.png"/>
+        </property>
+      </property>
+    </property>
+  </property>
   <property name="desktop-icons" type="empty">
     <property name="style" type="int" value="0"/>
     <property name="file-icons" type="empty">
