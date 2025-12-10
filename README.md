@@ -1,4 +1,4 @@
-# Ubuntu 22.04 Hardened Guest OS
+# tinyOS
 
 Custom Ubuntu 22.04 guest operating system configured with enterprise security hardening and smart card authentication.
 
@@ -14,7 +14,7 @@ Custom Ubuntu 22.04 guest operating system configured with enterprise security h
 ## Project Structure
 
 ```
-et-linux-guest/cubic/
+tinyOS/cubic/
 ├── config/
 │   └── user-data                    # Cloud-init autoinstall configuration
 │   └── meta-data                    
@@ -82,7 +82,7 @@ To add a new module, create a numbered script (e.g., `25_new_feature.sh`) and ad
 
 ## Usage
 
-Build the custom ISO using Cubic with the provided configuration in `et-linux-guest/cubic/`.
+Build the custom ISO using Cubic with the provided configuration in `tinyOS/cubic/`.
 
 ## Installation Log
 
