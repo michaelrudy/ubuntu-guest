@@ -14,7 +14,7 @@ Custom Ubuntu 22.04 guest operating system configured with enterprise security h
 ## Project Structure
 
 ```
-tinyOS/cubic/
+tinyos/cubic/
 ├── config/
 │   └── user-data                    # Cloud-init autoinstall configuration
 │   └── meta-data                    
