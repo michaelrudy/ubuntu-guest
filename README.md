@@ -24,7 +24,9 @@ et-linux-guest/cubic/
 │       ├── 00_base_system.sh        # Base system setup (apt, locale)
 │       ├── 10_xfce_desktop.sh       # XFCE4 desktop + LightDM display manager
 │       ├── 20_smart_card.sh         # Smart card stack (pcscd, opensc)
+│       ├── 25_usbguard.sh           # USBGuard package installation
 │       ├── 30_audio.sh              # PulseAudio and audio packages
+│       ├── 35_firefox.sh            # Firefox ESR (non-snap) from Mozilla PPA
 │       ├── 40_proprietary_debs.sh   # Custom .deb packages (rdcore, safenet)
 │       ├── 50_ansible_stig.sh       # Ansible + UBUNTU22-STIG role
 │       └── 99_cleanup.sh            # Remove unwanted apps, finalize
@@ -34,9 +36,11 @@ et-linux-guest/cubic/
         ├── 00_system_prep.sh        # Locale generation
         ├── 10_cleanup_apps.sh       # Placeholder (cleanup done in pre-install)
         ├── 20_smart_card_config.sh  # Configure p11-kit SafeNet module
+        ├── 25_usb_whitelist.sh      # Configure USBGuard device whitelist
         ├── 30_user_setup.sh         # Create users (lightdm, kiosk), configure autologin
         ├── 35_audio_config.sh       # Configure audio/video groups, PulseAudio
         ├── 40_xfce_config.sh        # XFCE4 panel, desktop, kiosk lockdown
+        ├── 45_firefox_avd.sh        # Firefox AVD web client kiosk policies
         ├── 50_apply_stig.sh         # Run DISA STIG hardening playbook
         └── 99_finalize.sh           # Enable LightDM, final system checks
 ```
