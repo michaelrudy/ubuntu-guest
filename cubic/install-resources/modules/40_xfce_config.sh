@@ -44,6 +44,7 @@ tee /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml > /dev/
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
         <value type="int" value="2"/>
+        <value type="int" value="3"/>
       </property>
     </property>
     <property name="panel-2" type="empty">
@@ -63,7 +64,7 @@ tee /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml > /dev/
         <value type="double" value="0.95"/>
       </property>
       <property name="plugin-ids" type="array">
-        <value type="int" value="3"/>
+        <value type="int" value="4"/>
       </property>
     </property>
   </property>
@@ -73,11 +74,16 @@ tee /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml > /dev/
         <value type="string" value="msrdc.desktop"/>
       </property>
     </property>
-    <property name="plugin-2" type="string" value="pulseaudio">
+    <property name="plugin-2" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="avd-webclient.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-3" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="show-notifications" type="bool" value="true"/>
     </property>
-    <property name="plugin-3" type="string" value="tasklist">
+    <property name="plugin-4" type="string" value="tasklist">
       <property name="flat-buttons" type="bool" value="true"/>
       <property name="include-all-workspaces" type="bool" value="true"/>
       <property name="show-labels" type="bool" value="true"/>

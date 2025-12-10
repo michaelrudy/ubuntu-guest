@@ -9,7 +9,7 @@ apt install -y \
   dbus-user-session \
   libsoup-3.0-0 \
   libwebkit2gtk-4.1-dev \
-  libubsan1 
+  libubsan1
 
 # TO-DO: some of the packages above are not exclusively used for XFCE; might move them to a common module
 

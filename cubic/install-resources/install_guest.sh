@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Modular installation script for Cubic chroot environment
-# Needs to be run in an internet-connected environment
-# Assumes rdcore.deb and safenet.deb are in /root/install-resources/pre-install/
+# Modular guest OS installation and hardening script
+# Runs during first boot / autoinstall process
 
 set -e  # Exit on any error
 
@@ -27,21 +26,24 @@ run_module() {
 
 # Main execution
 echo "╔════════════════════════════════════════════════════════════════╗"
-echo "║  Ubuntu 22.04 Hardened Guest - Pre-Install Setup"
-echo "║  Running modular installation..."
+echo "║  Ubuntu 22.04 Hardened Guest - Installation & Configuration"
+echo "║  Running modular setup..."
 echo "╚════════════════════════════════════════════════════════════════╝"
 
 # Run modules in order
-run_module "00_base_system.sh"
-run_module "10_xfce_desktop.sh"
-run_module "20_smart_card.sh"
-run_module "25_usbguard.sh"
-run_module "30_audio.sh"
-run_module "40_proprietary_debs.sh"
-run_module "50_ansible_stig.sh"
-run_module "99_cleanup.sh"
+run_module "00_system_prep.sh"
+run_module "10_cleanup_apps.sh"
+run_module "20_smart_card_config.sh"
+run_module "25_usb_whitelist.sh"
+run_module "30_user_setup.sh"
+run_module "35_audio_config.sh"
+run_module "40_xfce_config.sh"
+run_module "45_firefox_avd.sh"
+run_module "50_apply_stig.sh"
+run_module "99_finalize.sh"
 
 echo ""
 echo "╔════════════════════════════════════════════════════════════════╗"
 echo "║  ✓ All modules completed successfully"
+echo "║  System ready for reboot"
 echo "╚════════════════════════════════════════════════════════════════╝"

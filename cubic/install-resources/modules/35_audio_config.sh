@@ -15,7 +15,7 @@ systemctl --global enable pulseaudio.socket || true
 systemctl --global enable pulseaudio.service || true
 
 # Add kiosk user to audio and video groups
-usermod -aG audio,video kiosk || true
+usermod -aG audio,video,render kiosk || true
 
 # Create PulseAudio configuration for kiosk user
 mkdir -p /home/kiosk/.config/pulse
