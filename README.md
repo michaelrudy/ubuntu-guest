@@ -1,4 +1,4 @@
-# tinyOS
+# tinyos
 
 Custom Ubuntu 22.04 guest operating system configured with enterprise security hardening and smart card authentication.
 
@@ -82,7 +82,7 @@ To add a new module, create a numbered script (e.g., `25_new_feature.sh`) and ad
 
 ## Usage
 
-Build the custom ISO using Cubic with the provided configuration in `tinyOS/cubic/`.
+Build the custom ISO using Cubic with the provided configuration in `tinyos/cubic/`.
 
 ## Installation Log
 
