@@ -78,7 +78,8 @@ tee /etc/opt/edge/policies/managed/managed.json > /dev/null << 'EOF'
   "NotificationsAllowedForUrls": [
     "https://client.wvd.microsoft.com",
     "https://*.wvd.microsoft.com"
-  ]
+  ],
+  "DefaultMediaStreamSetting": 1
 }
 EOF
 
