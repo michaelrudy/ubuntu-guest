@@ -39,7 +39,10 @@ tee /etc/opt/edge/policies/managed/managed.json > /dev/null << 'EOF'
     "*.office.com",
     "https://*.office.com/*"
   ],
-  "RestoreOnStartup": 1,
+  "RestoreOnStartup": 4,
+  "RestoreOnStartupURLs": [
+    "https://client.wvd.microsoft.com/arm/webclient/index.html"
+  ],
   "HomepageLocation": "https://client.wvd.microsoft.com/arm/webclient/index.html",
   "HomepageIsNewTabPage": false,
   "ShowHomeButton": true,
@@ -64,7 +67,7 @@ Version=1.0
 Type=Application
 Name=AVD Web Client (Edge)
 Comment=Azure Virtual Desktop Web Client via Microsoft Edge
-Exec=/usr/bin/microsoft-edge-stable
+Exec=/usr/bin/microsoft-edge-stable --no-first-run https://client.wvd.microsoft.com/arm/webclient/index.html
 Icon=microsoft-edge
 Terminal=false
 Categories=Network;RemoteAccess;
