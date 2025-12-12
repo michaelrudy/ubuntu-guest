@@ -54,7 +54,31 @@ tee /etc/opt/edge/policies/managed/managed.json > /dev/null << 'EOF'
   "BrowserSignin": 0,
   "SyncDisabled": true,
   "MetricsReportingEnabled": false,
-  "SpellcheckEnabled": true
+  "SpellcheckEnabled": true,
+  "AudioCaptureAllowed": true,
+  "AudioCaptureAllowedUrls": [
+    "https://client.wvd.microsoft.com",
+    "https://*.wvd.microsoft.com"
+  ],
+  "VideoCaptureAllowed": true,
+  "VideoCaptureAllowedUrls": [
+    "https://client.wvd.microsoft.com",
+    "https://*.wvd.microsoft.com"
+  ],
+  "DefaultPopupsSetting": 2,
+  "PopupsAllowedForUrls": [
+    "https://client.wvd.microsoft.com",
+    "https://*.wvd.microsoft.com",
+    "https://login.microsoftonline.com",
+    "https://*.login.microsoftonline.com",
+    "https://login.microsoft.com",
+    "https://*.microsoft.com"
+  ],
+  "DefaultNotificationsSetting": 2,
+  "NotificationsAllowedForUrls": [
+    "https://client.wvd.microsoft.com",
+    "https://*.wvd.microsoft.com"
+  ]
 }
 EOF
 
