@@ -9,4 +9,4 @@ apt install -f -y
 # Install libnss3-tools for smart card support
 apt install -y libnss3-tools
 
-echo "✓ Microsoft Edge installed"
+echo "Microsoft Edge installed"

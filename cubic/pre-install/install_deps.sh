@@ -45,5 +45,5 @@ run_module "99_cleanup.sh"
 
 echo ""
 echo "╔════════════════════════════════════════════════════════════════╗"
-echo "║  ✓ All modules completed successfully"
+echo "║  All modules completed successfully"
 echo "╚════════════════════════════════════════════════════════════════╝"

@@ -97,11 +97,11 @@ modutil -dbdir sql:"$FIREFOX_PROFILE_DIR" -add "SafeNet Authentication Client" -
 # Set ownership
 chown -R kiosk:kiosk /home/kiosk/.mozilla
 
-echo "✓ Firefox smart card module configured (libeToken.so)"
+echo "Firefox smart card module configured (libeToken.so)"
 
 # Set proper permissions
 chmod 644 /etc/firefox/policies/policies.json
 
-echo "✓ Firefox configured for AVD Web Client kiosk mode"
-echo "✓ URL restrictions applied - only Microsoft AVD domains allowed"
-echo "✓ Desktop launcher created: avd-webclient.desktop"
+echo "Firefox configured for AVD Web Client kiosk mode"
+echo "URL restrictions applied - only Microsoft AVD domains allowed"
+echo "Desktop launcher created: avd-webclient.desktop"

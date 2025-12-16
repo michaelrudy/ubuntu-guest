@@ -124,7 +124,7 @@ modutil -dbdir sql:/home/kiosk/.pki/nssdb -add "SafeNet Authentication Client" -
 # Set ownership
 chown -R kiosk:kiosk /home/kiosk/.pki
 
-echo "✓ Edge smart card module configured (libeToken.so)"
+echo "Edge smart card module configured (libeToken.so)"
 
 # Set proper permissions
 chmod 644 /etc/opt/edge/policies/managed/managed.json
@@ -135,6 +135,6 @@ if [ -d /etc/microsoft-edge/policies/managed ]; then
     chmod 644 /etc/microsoft-edge/policies/managed/managed.json
 fi
 
-echo "✓ Microsoft Edge configured for AVD Web Client kiosk mode"
-echo "✓ URL restrictions applied - only Microsoft AVD domains allowed"
-echo "✓ Desktop launcher created: avd-webclient-edge.desktop"
+echo "Microsoft Edge configured for AVD Web Client kiosk mode"
+echo "URL restrictions applied - only Microsoft AVD domains allowed"
+echo "Desktop launcher created: avd-webclient-edge.desktop"

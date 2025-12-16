@@ -11,4 +11,4 @@ add-apt-repository ppa:mozillateam/ppa -y
 apt update
 apt install -y firefox-esr libnss3-tools
 
-echo "✓ Firefox ESR installed"
+echo "Firefox ESR installed"
