@@ -15,9 +15,9 @@ run_module() {
     
     if [[ -f "${module_path}" ]]; then
         echo ""
-        echo "╔════════════════════════════════════════════════════════════════╗"
-        echo "║  Running: ${module}"
-        echo "╚════════════════════════════════════════════════════════════════╝"
+        echo "================================================================="
+        echo "  Running: ${module}"
+        echo "================================================================="
         bash "${module_path}"
     else
         echo "Module not found: ${module_path}"
@@ -26,10 +26,10 @@ run_module() {
 }
 
 # Main execution
-echo "╔════════════════════════════════════════════════════════════════╗"
-echo "║  Ubuntu 22.04 Hardened Guest - Pre-Install Setup"
-echo "║  Running modular installation..."
-echo "╚════════════════════════════════════════════════════════════════╝"
+echo "================================================================="
+echo "  Ubuntu 22.04 Hardened Guest - Pre-Install Setup"
+echo "  Running modular installation..."
+echo "================================================================="
 
 # Run modules in order
 run_module "00_base_system.sh"
@@ -44,6 +44,6 @@ run_module "50_ansible_stig.sh"
 run_module "99_cleanup.sh"
 
 echo ""
-echo "╔════════════════════════════════════════════════════════════════╗"
-echo "║  All modules completed successfully"
-echo "╚════════════════════════════════════════════════════════════════╝"
+echo "================================================================="
+echo "  All modules completed successfully"
+echo "================================================================="

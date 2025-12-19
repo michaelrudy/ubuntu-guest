@@ -16,7 +16,7 @@ Custom Ubuntu 22.04 guest operating system configured with enterprise security h
 ```
 tinyos/cubic/
 ├── config/
-│   └── user-data                    # Cloud-init autoinstall configuration
+│   ├── user-data                    # Cloud-init autoinstall configuration
 │   └── meta-data                    
 ├── pre-install/
 │   ├── install_deps.sh              # Main pre-install orchestrator
@@ -27,11 +27,24 @@ tinyos/cubic/
 │       ├── 25_usbguard.sh           # USBGuard package installation
 │       ├── 30_audio.sh              # PulseAudio and audio packages
 │       ├── 35_firefox.sh            # Firefox ESR (non-snap) from Mozilla PPA
+│       ├── 36_edge.sh               # Microsoft Edge browser installation
 │       ├── 40_proprietary_debs.sh   # Custom .deb packages (rdcore, safenet)
 │       ├── 50_ansible_stig.sh       # Ansible + UBUNTU22-STIG role
 │       └── 99_cleanup.sh            # Remove unwanted apps, finalize
 └── install-resources/
     ├── install_guest.sh             # Main guest installation orchestrator
+    ├── assets/
+    │   └── wallpaper.png            # Desktop wallpaper
+    ├── config/
+    │   └── xfce4/                   # XFCE4 XML configuration files
+    │       ├── xfce4-panel.xml      # Panel layout and plugins
+    │       ├── xfce4-desktop.xml    # Desktop icons and wallpaper
+    │       ├── xfce4-session.xml    # Session settings
+    │       ├── xfce4-power-manager.xml  # Power and screen blanking
+    │       ├── xfce4-screensaver.xml    # Screensaver (disabled)
+    │       ├── xfce4-keyboard-shortcuts.xml  # Keyboard shortcuts
+    │       ├── kioskrc              # Kiosk lockdown profile
+    │       └── xfce4-screensaver.desktop  # Autostart disable
     └── modules/                     # Guest install modules (run on first boot)
         ├── 00_system_prep.sh        # Locale generation
         ├── 10_cleanup_apps.sh       # Placeholder (cleanup done in pre-install)
@@ -41,6 +54,7 @@ tinyos/cubic/
         ├── 35_audio_config.sh       # Configure audio/video groups, PulseAudio
         ├── 40_xfce_config.sh        # XFCE4 panel, desktop, kiosk lockdown
         ├── 45_firefox_avd.sh        # Firefox AVD web client kiosk policies
+        ├── 46_edge_avd.sh           # Edge AVD web client kiosk policies
         ├── 50_apply_stig.sh         # Run DISA STIG hardening playbook
         └── 99_finalize.sh           # Enable LightDM, final system checks
 ```

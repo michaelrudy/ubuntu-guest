@@ -15,6 +15,7 @@ tee /tmp/apply-stig.yml > /dev/null << 'EOF'
   hosts: localhost
   connection: local
   become: true
+  ignore_errors: true
 
   vars:
     ubtu22stig_cat1: true

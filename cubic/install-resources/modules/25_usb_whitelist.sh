@@ -41,13 +41,15 @@ tee /etc/usbguard/rules.conf > /dev/null << 'EOF'
 # QEMU USB Tablet (0627:0001) - Required for mouse in VM
 allow id 0627:0001
 
-# QEMU USB Keyboard (0627:0001) - Some VMs use same ID
-allow with-interface 03:01:01
-
 # USB Root Hubs (1d6b:0002 and 1d6b:0003) - Required for USB to work
-allow id 1d6b:0002
-allow id 1d6b:0003
 allow id 1d6b:*
+
+# ===== Dell Pro Broadcom Contactless SmartCard Reader =====
+allow id 0a5c:*
+
+# ===== GENERIC INPUT DEVICES =====
+# Allow all keyboards and mice (HID class 03, subclass 00/01, protocol 01=keyboard 02=mouse)
+allow with-interface one-of { 03:00:01 03:01:01 03:00:02 03:01:02 }
 
 # ===== APPROVED PERIPHERAL DEVICES =====
 # OmniKey Smart Card Reader (076b:3031)

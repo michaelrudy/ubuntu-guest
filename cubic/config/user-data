@@ -16,7 +16,7 @@ autoinstall:
   storage:
     layout:
       name: direct
-
+      
   late-commands:
     # Set root password (password: root) - allows "su - root" or TTY login
     - curtin in-target -- bash -c "echo 'root:root' | chpasswd"

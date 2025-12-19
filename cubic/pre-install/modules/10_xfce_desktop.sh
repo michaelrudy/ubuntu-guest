@@ -4,12 +4,14 @@ set -e
 echo "=== Install XFCE4 + LightDM ==="
 apt install -y \
   xfce4 \
+  xfce4-power-manager-plugins \
   lightdm \
   lightdm-gtk-greeter \
   dbus-user-session \
   libsoup-3.0-0 \
   libwebkit2gtk-4.1-dev \
-  libubsan1
+  libubsan1 \
+  network-manager
 
 # TO-DO: some of the packages above are not exclusively used for XFCE; might move them to a common module
 
