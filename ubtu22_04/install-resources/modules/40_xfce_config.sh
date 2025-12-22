@@ -9,9 +9,10 @@ INSTALL_RESOURCES_DIR="$(dirname "$SCRIPT_DIR")"
 CONFIG_DIR="${INSTALL_RESOURCES_DIR}/config/xfce4"
 
 # Copy wallpaper to system backgrounds directory
-mkdir -p /usr/share/backgrounds
-cp "${INSTALL_RESOURCES_DIR}/assets/wallpaper.png" /usr/share/backgrounds/wallpaper.png
-chmod 644 /usr/share/backgrounds/wallpaper.png
+# Commenting out for custom backgrounds - but we will default to black and gray desktop theme
+# mkdir -p /usr/share/backgrounds
+# cp "${INSTALL_RESOURCES_DIR}/assets/wallpaper.png" /usr/share/backgrounds/wallpaper.png
+# chmod 644 /usr/share/backgrounds/wallpaper.png
 
 # Create XFCE4 configuration directories for kiosk user
 mkdir -p /home/kiosk/.config/xfce4/xfconf/xfce-perchannel-xml
