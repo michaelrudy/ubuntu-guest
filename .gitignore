@@ -1,4 +1,4 @@
-# Debian packages
 *.deb
 *.zip
 *.DS_Store
+*.iso

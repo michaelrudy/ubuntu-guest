@@ -8,12 +8,22 @@ apt install -y \
   lightdm \
   lightdm-gtk-greeter \
   dbus-user-session \
-  libsoup-3.0-0 \
-  libwebkit2gtk-4.1-dev \
   libubsan1 \
   network-manager # remember to comment out this line
 
-# TO-DO: some of the packages above are not exclusively used for XFCE; might move them to a common module
+: '
+Include these in the list above if we are installing the reference client - NOTE will only work on Ubuntu 22.04 due to
+dpkg python3 post-installation failures in 24.04.
+libsoup-3.0-0 \  
+libwebkit2gtk-4.1-dev \
+'
+
+
+ # libsoup-3.0-0 \  # we do not need these if we are ommitting the reference client
+# libwebkit2gtk-4.1-dev \
+
+apt remove -y light-locker-settings || true
+apt remove -y light-locker || true
 
 # unsure if I need these commands
 echo "=== Configure LightDM as default display manager ==="

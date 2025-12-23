@@ -2,7 +2,7 @@
 set -e
 
 echo "=== Update apt metadata ==="
-apt update -y
+apt update -y && apt upgrade -y
 apt install git -y # needed for ansible stig
 
 echo "=== Ensure locale is generated ==="
