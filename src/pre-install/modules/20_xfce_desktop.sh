@@ -8,7 +8,7 @@ apt install -y \
   lightdm \
   lightdm-gtk-greeter \
   dbus-user-session \
-  network-manager # remember to comment out this line
+  # network-manager # remember to comment out this line
 
 : '
 Include these in the list above if we are installing the reference client - NOTE will only work on Ubuntu 22.04 due to

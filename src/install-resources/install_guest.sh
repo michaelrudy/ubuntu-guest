@@ -39,6 +39,7 @@ run_module "50_user_setup.sh"
 run_module "60_audio_config.sh"
 run_module "70_xfce_config.sh"
 run_module "80_edge_avd.sh"
+#run_module "91_certificate_install.sh"
 # run_module "90_apply_stig.sh"
 run_module "100_finalize.sh"
 

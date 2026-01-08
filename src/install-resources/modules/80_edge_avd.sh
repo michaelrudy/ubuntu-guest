@@ -18,18 +18,28 @@ tee /etc/opt/edge/policies/managed/managed.json > /dev/null << 'EOF'
     "*.wvd.microsoft.com",
     "https://client.wvd.microsoft.com/*",
     "https://*.wvd.microsoft.com/*",
+    "client.wvd.microsoft.scloud",
+    "*.wvd.microsoft.scloud",
+    "https://client.wvd.microsoft.scloud/*",
+    "https://*.wvd.microsoft.scloud/*",
     "login.microsoft.com",
     "login.microsoftonline.com",
     "https://login.microsoftonline.com/*",
     "*.login.microsoft.com",
     "https://login.microsoft.com/*",
     "https://*.login.microsoft.com/*",
+    "login.microsoft.scloud",
+    "https://login.microsoft.scloud/*",
+    "*.login.microsoft.scloud",
+    "https://*.login.microsoft.scloud/*",
     "*.login.live.com",
     "https://*.login.live.com/*",
     "*.windows.net",
     "https://*.windows.net/*",
     "*.microsoft.com",
     "https://*.microsoft.com/*",
+    "*.microsoft.scloud",
+    "https://*.microsoft.scloud/*",
     "*.msftauth.net",
     "https://*.msftauth.net/*",
     "*.msauth.net",
@@ -58,26 +68,36 @@ tee /etc/opt/edge/policies/managed/managed.json > /dev/null << 'EOF'
   "AudioCaptureAllowed": true,
   "AudioCaptureAllowedUrls": [
     "https://client.wvd.microsoft.com",
-    "https://*.wvd.microsoft.com"
+    "https://*.wvd.microsoft.com",
+    "https://client.wvd.microsoft.scloud",
+    "https://*.wvd.microsoft.scloud"
   ],
   "VideoCaptureAllowed": true,
   "VideoCaptureAllowedUrls": [
     "https://client.wvd.microsoft.com",
-    "https://*.wvd.microsoft.com"
+    "https://*.wvd.microsoft.com",
+    "https://client.wvd.microsoft.scloud",
+    "https://*.wvd.microsoft.scloud"
   ],
   "DefaultPopupsSetting": 2,
   "PopupsAllowedForUrls": [
     "https://client.wvd.microsoft.com",
     "https://*.wvd.microsoft.com",
+    "https://client.wvd.microsoft.scloud",
+    "https://*.wvd.microsoft.scloud",
     "https://login.microsoftonline.com",
     "https://*.login.microsoftonline.com",
     "https://login.microsoft.com",
-    "https://*.microsoft.com"
+    "https://*.microsoft.com",
+    "https://login.microsoft.scloud",
+    "https://*.login.microsoft.scloud"
   ],
   "DefaultNotificationsSetting": 2,
   "NotificationsAllowedForUrls": [
     "https://client.wvd.microsoft.com",
-    "https://*.wvd.microsoft.com"
+    "https://*.wvd.microsoft.com",
+    "https://client.wvd.microsoft.scloud",
+    "https://*.wvd.microsoft.scloud"
   ],
   "DefaultMediaStreamSetting": 1
 }
